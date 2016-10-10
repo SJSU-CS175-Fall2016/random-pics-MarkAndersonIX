@@ -17,7 +17,7 @@ public class FavoritesDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE IF NOT EXISTS " +
                     FavoritesContract.FavoriteEntry.TABLE_NAME + " (" +
                     FavoritesContract.FavoriteEntry._ID + " INTEGER PRIMARY KEY," +
-                    FavoritesContract.FavoriteEntry.COLUMN_NAME_URL + TEXT_TYPE + " )";
+                    FavoritesContract.FavoriteEntry.COLUMN_NAME_URL + TEXT_TYPE + " UNIQUE )";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + FavoritesContract.FavoriteEntry.TABLE_NAME;
