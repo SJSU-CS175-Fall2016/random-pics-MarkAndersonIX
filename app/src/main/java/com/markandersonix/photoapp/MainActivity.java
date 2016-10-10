@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.markandersonix.photoapp.Models.Favorites.FavoritesDbHelper;
 import com.markandersonix.photoapp.Models.Photo.Photo;
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.main_favorites){
-            //Toast.makeText(this,"Favorites",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, Favorites.class);
+            //Toast.makeText(this,"FavoritesActivity",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, FavoritesActivity.class);
             startActivity(intent);
         }
         if(item.getItemId() == R.id.main_search){
@@ -89,24 +89,31 @@ public class MainActivity extends AppCompatActivity {
             onSearchRequested();
         }
         if(item.getItemId() == R.id.main_random){
-            //Toast.makeText(this,"Random",Toast.LENGTH_SHORT).show();
-            getPhotos();
+            randPageNumber++;
+            //Toast.makeText(this, "Page: "+randPageNumber, Toast.LENGTH_SHORT).show();
+            if(!getPhotos()){
+                randPageNumber = 1;
+                getPhotos();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
-    protected void getPhotos(){
+    protected boolean getPhotos(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url_base)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UnsplashService service = retrofit.create(UnsplashService.class);
-        randPageNumber = (randPageNumber++)%10;
         Call<List<PhotoData>> data = service.listPhotos(application_id, randPageNumber);
+        boolean success = true;
         try {
             data.enqueue(new Callback<List<PhotoData>>() {
                 @Override
                 public void onResponse(Call<List<PhotoData>> call, Response<List<PhotoData>> response) {
                     List<PhotoData> photoData = response.body();
+                    if(photoData != null){
+                        photos.clear();
+                    }
                     for(PhotoData data: photoData){
                         photos.add(
                                 new Photo(
@@ -134,7 +141,10 @@ public class MainActivity extends AppCompatActivity {
                     //Picasso.with(getApplicationContext()).load("https://images.unsplash.com/profile-fb-1461218156-c196eaad09a4.jpg").into(picture);
                 }
             });
-        }catch(Exception ex){}
+        }catch(Exception ex){
+            success = false;
+        }
+        return success;
     }
     protected void searchPhotos(String query,int pages){
         photos.clear();
