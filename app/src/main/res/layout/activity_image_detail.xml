@@ -9,7 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.markandersonix.photoapp.ImageDetail"
+    tools:context="com.markandersonix.photoapp.PhotoDetail"
     android:background="@color/colorPrimaryDark">
 
     <ImageView

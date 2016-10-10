@@ -1,6 +1,7 @@
 package com.markandersonix.photoapp;
 
 import com.markandersonix.photoapp.Models.Photo.PhotoData;
+import com.markandersonix.photoapp.Models.Search.SearchData;
 
 import java.util.List;
 
@@ -14,5 +15,11 @@ import retrofit2.http.Query;
 
 public interface UnsplashService {
     @GET("photos/?client_id=7a351404b1d49701eaea4c1a8eff9ba0e0ef7d36b94513dc3fbf5093b900a47b")
-    Call<List<PhotoData>> listPhotos(@Query("client_id") String client_id);
+    Call<List<PhotoData>> listPhotos(@Query("client_id") String client_id, @Query("page") int page);
+
+    @GET("search/photos/?")
+    Call<SearchData> searchPhotos(@Query("client_id") String client_id, @Query("query") String query, @Query("page") int page);
+
+    //@GET("search/")
+
 }

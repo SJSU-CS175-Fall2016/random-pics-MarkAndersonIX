@@ -1,17 +1,19 @@
 package com.markandersonix.photoapp.Models.Photo;
 
+import java.io.Serializable;
+
 /**
  * Created by Mark on 10/8/2016.
  */
 
-public class Photo {
+public class Photo implements Serializable {
     private String thumb;
     private String large;
     private String id;
     private String author;
     private String username;
 
-    public Photo(String id, String author, String username, String thumb, String large) {
+    public Photo (String id, String author, String username, String thumb, String large) {
         this.id = id;
         this.author = author;
         this.username = username;
