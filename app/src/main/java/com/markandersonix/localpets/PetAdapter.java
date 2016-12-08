@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.markandersonix.localpets.Models.Photo.Pet;
+import com.markandersonix.localpets.Models.Search.Pet;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Mark on 10/9/2016.
@@ -23,11 +25,17 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
     private Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
+        public TextView nameText;
+        public TextView ageText;
+        public TextView breedText;
+        public TextView locationText;
         public ImageView imageView;
         public ViewHolder(View view){
             super(view);
-            textView = (TextView) view.findViewById(R.id.tile_txt);
+            nameText = (TextView) view.findViewById(R.id.tile_name_txt);
+            ageText = (TextView) view.findViewById(R.id.tile_age_txt);
+            breedText = (TextView) view.findViewById(R.id.tile_breed_txt);
+            locationText = (TextView) view.findViewById(R.id.tile_location_txt);
             imageView = (ImageView) view.findViewById(R.id.tile_img);
         }
     }
@@ -45,19 +53,22 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position).getAuthor());
+        holder.nameText.setText("Name: " + data.get(position).getName().get$t());
+        holder.ageText.setText("Age: " + data.get(position).getAge().get$t());
+        holder.breedText.setText("Breed: " + data.get(position).getBreeds().toString());
+        holder.locationText.setText("Location: " + data.get(position).getContact().getCity().get$t());
         final Pet pet = data.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if(pet != null) {
                     Intent intent = new Intent(view.getContext(), PetDetailActivity.class);
-                    intent.putExtra("pet", pet);
+                    intent.putExtra("pet", pet.getId().get$t()); //<<<<Does this work?
                     view.getContext().startActivity(intent);
                 }
             }
         });
-        Picasso.with(context).load(data.get(position).getSmall())
+        Picasso.with(context).load(data.get(position).getMedia().getPhotos().getPhoto().get(1).get$t())
                 .resize(200,200)//holder.imageView.getWidth(), holder.imageView.getHeight())
                 .centerCrop().into(holder.imageView);
     }

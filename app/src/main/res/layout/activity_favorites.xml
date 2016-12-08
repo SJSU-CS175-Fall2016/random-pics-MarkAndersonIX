@@ -9,7 +9,7 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:background="#000000"
-    tools:context="com.markandersonix.photoapp.FavoritesActivity">
+    tools:context="com.markandersonix.localpets.FavoritesActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

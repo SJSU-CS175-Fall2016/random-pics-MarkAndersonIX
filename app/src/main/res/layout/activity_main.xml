@@ -9,13 +9,13 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.markandersonix.photoapp.MainActivity">
+    tools:context="com.markandersonix.localpets.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:id="@+id/photo_recycler_view" />
+        android:id="@+id/pet_recycler_view" />
 
     <ImageView
         android:layout_width="match_parent"

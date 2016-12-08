@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.markandersonix.photoapp">
+    package="com.markandersonix.localpets">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.markandersonix.localpets.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +24,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".PhotoDetailActivity" />
-        <activity android:name=".FavoritesActivity"></activity>
+        <activity android:name="com.markandersonix.localpets.PetDetailActivity" />
+        <activity android:name="com.markandersonix.localpets.FavoritesActivity" />
+        <activity
+            android:name="com.markandersonix.localpets.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
