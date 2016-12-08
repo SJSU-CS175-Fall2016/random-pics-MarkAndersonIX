@@ -1,13 +1,18 @@
 
 package com.markandersonix.localpets.Models.Search;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Address1 {
+public class Address1 implements Serializable
+{
 
     private String $t;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = 7092469717132186730L;
 
     /**
      * 
@@ -33,6 +38,23 @@ public class Address1 {
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append($t).append(additionalProperties).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Address1) == false) {
+            return false;
+        }
+        Address1 rhs = ((Address1) other);
+        return new EqualsBuilder().append($t, rhs.$t).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

@@ -63,12 +63,12 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
             public void onClick(View view) {
                 if(pet != null) {
                     Intent intent = new Intent(view.getContext(), PetDetailActivity.class);
-                    intent.putExtra("pet", pet.getId().get$t()); //<<<<Does this work?
+                    intent.putExtra("pet", pet); //<<<<Does this work?
                     view.getContext().startActivity(intent);
                 }
             }
         });
-        Picasso.with(context).load(data.get(position).getMedia().getPhotos().getPhoto().get(1).get$t())
+        Picasso.with(context).load(data.get(position).getMedia().getPhotos().getPhoto().get(2).get$t())
                 .resize(200,200)//holder.imageView.getWidth(), holder.imageView.getHeight())
                 .centerCrop().into(holder.imageView);
     }

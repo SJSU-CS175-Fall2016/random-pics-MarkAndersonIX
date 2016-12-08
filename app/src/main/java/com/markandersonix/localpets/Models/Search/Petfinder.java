@@ -1,10 +1,14 @@
 
 package com.markandersonix.localpets.Models.Search;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Petfinder {
+public class Petfinder implements Serializable
+{
 
     private String xmlnsXsi;
     private LastOffset lastOffset;
@@ -12,6 +16,7 @@ public class Petfinder {
     private Header header;
     private String xsiNoNamespaceSchemaLocation;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = -8164279394079798211L;
 
     /**
      * 
@@ -109,6 +114,23 @@ public class Petfinder {
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(xmlnsXsi).append(lastOffset).append(pets).append(header).append(xsiNoNamespaceSchemaLocation).append(additionalProperties).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Petfinder) == false) {
+            return false;
+        }
+        Petfinder rhs = ((Petfinder) other);
+        return new EqualsBuilder().append(xmlnsXsi, rhs.xmlnsXsi).append(lastOffset, rhs.lastOffset).append(pets, rhs.pets).append(header, rhs.header).append(xsiNoNamespaceSchemaLocation, rhs.xsiNoNamespaceSchemaLocation).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

@@ -30,7 +30,7 @@ public class PetDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_detail);
+        setContentView(R.layout.activity_pet_detail);
         ButterKnife.bind(this);
         bundle = getIntent().getExtras();
         Display display = getWindowManager().getDefaultDisplay();
@@ -40,7 +40,7 @@ public class PetDetailActivity extends AppCompatActivity {
 
         if(bundle != null) {
             pet = (Pet) bundle.getSerializable("pet");
-            String large = pet.getMedia().getPhotos().getPhoto().get(1).get$t();
+            String large = pet.getMedia().getPhotos().getPhoto().get(2).get$t();
             Picasso.with(this).load(large).centerInside()
                     .resize(size.x,size.y)
                     .into(detailImage);
@@ -50,8 +50,7 @@ public class PetDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(pet != null) {
-                    String imageUrl = pet.getMedia().getPhotos().getPhoto().get(1).get$t();
-                    String large = pet.getMedia().getPhotos().getPhoto().get(1).get$t();
+                    String large = pet.getMedia().getPhotos().getPhoto().get(2).get$t();
                     if(cropped) {
                         Picasso.with(getApplicationContext()).load(large)
                                 .resize(size.x, size.y)

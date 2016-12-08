@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.markandersonix.localpets.MainActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,9 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name="com.markandersonix.localpets.PetDetailActivity" />
-        <activity android:name="com.markandersonix.localpets.FavoritesActivity" />
-        <activity
-            android:name="com.markandersonix.localpets.SearchActivity"
-            android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".PetDetailActivity" />
+        <activity android:name=".FavoritesActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

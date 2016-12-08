@@ -1,10 +1,14 @@
 
 package com.markandersonix.localpets.Models.Search;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Pet {
+public class Pet implements Serializable
+{
 
     private Options options;
     private Status status;
@@ -23,6 +27,7 @@ public class Pet {
     private LastUpdate lastUpdate;
     private Animal animal;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = 3362768445705480583L;
 
     /**
      * 
@@ -318,6 +323,23 @@ public class Pet {
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(options).append(status).append(contact).append(age).append(size).append(media).append(id).append(shelterPetId).append(breeds).append(name).append(sex).append(description).append(mix).append(shelterId).append(lastUpdate).append(animal).append(additionalProperties).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Pet) == false) {
+            return false;
+        }
+        Pet rhs = ((Pet) other);
+        return new EqualsBuilder().append(options, rhs.options).append(status, rhs.status).append(contact, rhs.contact).append(age, rhs.age).append(size, rhs.size).append(media, rhs.media).append(id, rhs.id).append(shelterPetId, rhs.shelterPetId).append(breeds, rhs.breeds).append(name, rhs.name).append(sex, rhs.sex).append(description, rhs.description).append(mix, rhs.mix).append(shelterId, rhs.shelterId).append(lastUpdate, rhs.lastUpdate).append(animal, rhs.animal).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

@@ -1,10 +1,14 @@
 
 package com.markandersonix.localpets.Models.Search;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Contact {
+public class Contact implements Serializable
+{
 
     private Phone phone;
     private State state;
@@ -15,6 +19,7 @@ public class Contact {
     private Fax fax;
     private Address1 address1;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = -12230019681364734L;
 
     /**
      * 
@@ -166,6 +171,23 @@ public class Contact {
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(phone).append(state).append(address2).append(email).append(city).append(zip).append(fax).append(address1).append(additionalProperties).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Contact) == false) {
+            return false;
+        }
+        Contact rhs = ((Contact) other);
+        return new EqualsBuilder().append(phone, rhs.phone).append(state, rhs.state).append(address2, rhs.address2).append(email, rhs.email).append(city, rhs.city).append(zip, rhs.zip).append(fax, rhs.fax).append(address1, rhs.address1).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

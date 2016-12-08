@@ -1,15 +1,20 @@
 
 package com.markandersonix.localpets.Models.Search;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Breeds {
-
-    private List<Breed> breed;
+public class Breeds implements Serializable
+{
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = 9038031747005093067L;
+	private List<Breed> breed;
+
     public Breeds(Breed ... breed){
         this.breed = Arrays.asList(breed);
     }
@@ -49,6 +54,23 @@ public class Breeds {
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(breed).append(additionalProperties).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Breeds) == false) {
+            return false;
+        }
+        Breeds rhs = ((Breeds) other);
+        return new EqualsBuilder().append(breed, rhs.breed).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }
